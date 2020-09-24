@@ -100,8 +100,7 @@ public class LinkedList {
 		list.prepend(1);
 		list.insert(66, 2);;
 		list.insert(1, 100);;
-		list.printList();
-		list.remove(6);
+		System.out.println(list.toString());
 		list.printList();
 	}
 }
