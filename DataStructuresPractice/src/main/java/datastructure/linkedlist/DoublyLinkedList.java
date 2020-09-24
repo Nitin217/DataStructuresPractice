@@ -6,39 +6,39 @@ import lombok.Data;
 
 @Data
 public class DoublyLinkedList {
-	Node head;
-	Node tail;
+	DoublyNode head;
+	DoublyNode tail;
 	int length;
 
 	public DoublyLinkedList(int value) {
-		this.head = new Node(value);
+		this.head = new DoublyNode(value);
 		this.tail = this.head;
 		this.length = 1;
 	}
 
 	public void append(int value) {
-		Node newNode= new Node(value);
-		newNode.setPrevious(this.tail);
-		this.tail.setNext(newNode);
-		this.tail=newNode;
+		DoublyNode newDoublyNode= new DoublyNode(value);
+		newDoublyNode.setPrevious(this.tail);
+		this.tail.setNext(newDoublyNode);
+		this.tail=newDoublyNode;
 		this.length++;
 	}
 
 	public void prepend(int value) {
-		Node newNode= new Node(value);
-		newNode.setNext(this.head);
-		this.head.setPrevious(newNode);
-		this.head=newNode;
+		DoublyNode newDoublyNode= new DoublyNode(value);
+		newDoublyNode.setNext(this.head);
+		this.head.setPrevious(newDoublyNode);
+		this.head=newDoublyNode;
 		this.length++;
 	}
 	
 	public void printList() {
 		int[] list=new int[this.length];
-		Node currentNode = this.head;
+		DoublyNode currentDoublyNode = this.head;
 		int i=0;
-		while (currentNode != null) {
-			list[i]=currentNode.getValue();
-			currentNode = currentNode.getNext();
+		while (currentDoublyNode != null) {
+			list[i]=currentDoublyNode.getValue();
+			currentDoublyNode = currentDoublyNode.getNext();
 			i++;
 		}
 		System.out.println(Arrays.toString(list));
@@ -49,23 +49,23 @@ public class DoublyLinkedList {
 		System.out.println(this.head);
 	}
 	
-	public void insert(int node, int value) {
-		// if node is greater than length , throw error
-		if (node >= this.length) {
+	public void insert(int DoublyNode, int value) {
+		// if DoublyNode is greater than length , throw error
+		if (DoublyNode >= this.length) {
 			this.append(value);
 		} else {
-			// if node is less than or equal to length then insert
+			// if DoublyNode is less than or equal to length then insert
 			int i = 0;
-			Node currentNode = this.head;
-			while (i <= node) {
-				if (i < node) {
-					currentNode = currentNode.getNext();
+			DoublyNode currentDoublyNode = this.head;
+			while (i <= DoublyNode) {
+				if (i < DoublyNode) {
+					currentDoublyNode = currentDoublyNode.getNext();
 
-				} else if (i == node) {
-					Node newNode = new Node(currentNode.getValue());
-					newNode.setNext(currentNode.getNext());
-					currentNode.setValue(value);
-					currentNode.setNext(newNode);
+				} else if (i == DoublyNode) {
+					DoublyNode newDoublyNode = new DoublyNode(currentDoublyNode.getValue());
+					newDoublyNode.setNext(currentDoublyNode.getNext());
+					currentDoublyNode.setValue(value);
+					currentDoublyNode.setNext(newDoublyNode);
 					this.length++;//forgot to increase length
 				}
 				i++;
@@ -74,22 +74,22 @@ public class DoublyLinkedList {
 
 	}
 	
-	public void remove(int node) {
-		if(node>=this.length || node<0) {
+	public void remove(int DoublyNode) {
+		if(DoublyNode>=this.length || DoublyNode<0) {
 			System.out.println("Invalid Index");
 		}else {
 			int i=0;
-			Node leaderNode = this.head;
-			Node nodeTodelete;
+			DoublyNode leaderDoublyNode = this.head;
+			DoublyNode DoublyNodeTodelete;
 		
-			while(i<=node) {
-				if (i < node-1) {
-					leaderNode = leaderNode.getNext();
+			while(i<=DoublyNode) {
+				if (i < DoublyNode-1) {
+					leaderDoublyNode = leaderDoublyNode.getNext();
 
-				}else if (i == node) {
-					nodeTodelete = leaderNode.getNext();
-					nodeTodelete.getNext().setPrevious(nodeTodelete.getPrevious());
-					leaderNode.setNext(nodeTodelete.getNext());
+				}else if (i == DoublyNode) {
+					DoublyNodeTodelete = leaderDoublyNode.getNext();
+					DoublyNodeTodelete.getNext().setPrevious(DoublyNodeTodelete.getPrevious());
+					leaderDoublyNode.setNext(DoublyNodeTodelete.getNext());
 					this.length--;
 				}
 				i++;
@@ -98,13 +98,13 @@ public class DoublyLinkedList {
 		
 	}
 	public DoublyLinkedList reverse() {
-		Node currentNode=this.tail;
-		DoublyLinkedList reverseList=new DoublyLinkedList(currentNode.getValue()); 
+		DoublyNode currentDoublyNode=this.tail;
+		DoublyLinkedList reverseList=new DoublyLinkedList(currentDoublyNode.getValue()); 
 		this.tail=this.head;
-		this.head=currentNode;
-		while (currentNode != null && currentNode.getPrevious()!=null) {
-			reverseList.append(currentNode.getPrevious().getValue());
-			currentNode = currentNode.getPrevious();		
+		this.head=currentDoublyNode;
+		while (currentDoublyNode != null && currentDoublyNode.getPrevious()!=null) {
+			reverseList.append(currentDoublyNode.getPrevious().getValue());
+			currentDoublyNode = currentDoublyNode.getPrevious();		
 		}
 		
 		return reverseList;

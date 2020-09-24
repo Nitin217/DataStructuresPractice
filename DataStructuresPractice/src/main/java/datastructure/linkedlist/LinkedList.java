@@ -10,7 +10,7 @@ public class LinkedList {
 	Node head;
 	Node tail;
 	int length;
-
+	static LinkedList list;
 	public LinkedList(int value) {
 		this.head = new Node(value);
 
@@ -92,9 +92,32 @@ public class LinkedList {
 		
 	}
 	
+	//[1, 100, 10, 5, 16, 2]
+	public void reverse() {
+		Node firstNode=this.head; 
+		Node secondNode=this.head.getNext();
+		this.tail=firstNode;
+		while(secondNode!=null) {
+			System.out.println("secondNode: "+secondNode.toString());
+			Node tempNode=secondNode.getNext();
+			if(tempNode!=null)
+				System.out.println("temp node value "+tempNode.getValue());
+			secondNode.setNext(firstNode);
+			System.out.println("new second node next value "+secondNode.getNext().getValue());
+			firstNode=secondNode;
+			System.out.println("new first node value "+firstNode.getValue());
+			secondNode=tempNode;
+			if(secondNode!=null)
+				System.out.println("new second node value "+secondNode.getValue());
+			System.out.println("------------------------------------");
+			
+		}
+		this.head.setNext(null);
+		this.head=firstNode;
+	}
 	
 	public static void main(String args[]) {
-		LinkedList list=new LinkedList(10);
+		list=new LinkedList(10);
 		list.append(5);
 		list.append(16);
 		list.prepend(1);
@@ -102,5 +125,8 @@ public class LinkedList {
 		list.insert(1, 100);;
 		System.out.println(list.toString());
 		list.printList();
+		list.reverse();
+		list.printList();
+		
 	}
 }
